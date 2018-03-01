@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-# TLE: 3_corner_4.txt
+# 
 if __name__ == "__main__":
   N = int(input())
   conditions = [list(map(int, input().split())) for i in range(N)]
@@ -11,6 +11,19 @@ if __name__ == "__main__":
   max_purchased_num = 0
   # 奇跡の明太子を調べる
   for i in range(M):
+    # 奇跡の明太子と同じならスキップ
+    is_skip = False
+    for k in kiseki:
+      if k == 0:
+        break
+      if mentaikos[i] == mentaikos[k-1]:
+        kiseki.append(i+1)
+        is_skip = True
+        break
+    if is_skip:
+      continue
+    
+    # 値段と辛さを走査する
     for j in range(N):
       if mentaikos[i][0] > conditions[j][0]:
         # 値段高いなら
